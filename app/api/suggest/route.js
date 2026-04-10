@@ -1,44 +1,44 @@
 import OpenAI from "openai";
-import { getLatestWeather } from "../../../lib/storage";
-
-const client = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY,
-});
+import { getLatestWeather } from "@/lib/storage";
 
 function extractJson(text) {
-    if (!text) return null;
+  if (!text) return null;
 
-    const cleaned = text
-        .replace(/```json/g, "")
-        .replace(/```/g, "")
-        .trim();
+  const cleaned = text
+    .replace(/```json/g, "")
+    .replace(/```/g, "")
+    .trim();
 
-    try {
-        return JSON.parse(cleaned);
-    } catch {
-        return null;
-    }
+  try {
+    return JSON.parse(cleaned);
+  } catch {
+    return null;
+  }
 }
 
 export async function GET() {
-    try {
-        if (!process.env.OPENAI_API_KEY) {
-            return Response.json(
-                { ok: false, error: "OPENAI_API_KEY is missing" },
-                { status: 500 }
-            );
-        }
+  try {
+    const apiKey = process.env.OPENAI_API_KEY;
 
-        const latestWeather = getLatestWeather();
+    if (!apiKey) {
+      return Response.json(
+        { ok: false, error: "OPENAI_API_KEY is missing" },
+        { status: 500 }
+      );
+    }
 
-        if (!latestWeather || !latestWeather.city) {
-            return Response.json(
-                { ok: false, error: "No stored weather data found. Fetch weather first." },
-                { status: 404 }
-            );
-        }
+    const client = new OpenAI({ apiKey });
 
-        const prompt = `
+    const latestWeather = getLatestWeather();
+
+    if (!latestWeather || !latestWeather.city) {
+      return Response.json(
+        { ok: false, error: "No stored weather data found. Fetch weather first." },
+        { status: 404 }
+      );
+    }
+
+    const prompt = `
 You are a weather insight assistant.
 
 Use the weather summary below to generate:
@@ -63,40 +63,40 @@ Use exactly this format:
 }
 `;
 
-        const completion = await client.chat.completions.create({
-            model: "gpt-4.1-mini",
-            temperature: 0.4,
-            messages: [
-                {
-                    role: "user",
-                    content: prompt,
-                },
-            ],
-        });
+    const completion = await client.chat.completions.create({
+      model: "gpt-4.1-mini",
+      temperature: 0.4,
+      messages: [
+        {
+          role: "user",
+          content: prompt,
+        },
+      ],
+    });
 
-        const text = completion.choices?.[0]?.message?.content || "";
-        const parsed = extractJson(text);
+    const text = completion.choices?.[0]?.message?.content || "";
+    const parsed = extractJson(text);
 
-        if (!parsed) {
-            return Response.json(
-                {
-                    ok: false,
-                    error: "Model did not return valid JSON",
-                    raw_output: text,
-                },
-                { status: 500 }
-            );
-        }
-
-        return Response.json({
-            ok: true,
-            suggestions: parsed,
-            weather: latestWeather,
-        });
-    } catch (error) {
-        return Response.json(
-            { ok: false, error: error.message || "Something went wrong" },
-            { status: 500 }
-        );
+    if (!parsed) {
+      return Response.json(
+        {
+          ok: false,
+          error: "Model did not return valid JSON",
+          raw_output: text,
+        },
+        { status: 500 }
+      );
     }
+
+    return Response.json({
+      ok: true,
+      suggestions: parsed,
+      weather: latestWeather,
+    });
+  } catch (error) {
+    return Response.json(
+      { ok: false, error: error.message || "Something went wrong" },
+      { status: 500 }
+    );
+  }
 }
