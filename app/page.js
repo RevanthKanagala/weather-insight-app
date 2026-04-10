@@ -45,38 +45,45 @@ export default function Home() {
     }
   }
 
-  async function handleGetSuggestions() {
-    try {
-      setError("");
-      setLoadingSuggestions(true);
+async function handleGetSuggestions() {
+  try {
+    setError("");
+    setLoadingSuggestions(true);
 
-      if (!weather) {
-        throw new Error("Fetch weather first");
-      }
-
-      const res = await fetch("/api/suggest", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ weather }),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok || !data.ok) {
-        throw new Error(data.error || "Failed to get suggestions");
-      }
-
-      setSuggestions(data.suggestions);
-    } catch (err) {
-      setSuggestions(null);
-      setError(err.message || "Something went wrong");
-    } finally {
-      setLoadingSuggestions(false);
+    if (!weather) {
+      throw new Error("Fetch weather first");
     }
-  }
 
+    const res = await fetch("/api/suggest", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ weather }),
+    });
+
+    const text = await res.text();
+    let data = {};
+
+    try {
+      data = text ? JSON.parse(text) : {};
+    } catch {
+      throw new Error("Server returned an invalid response");
+    }
+
+    if (!res.ok || !data.ok) {
+      throw new Error(data.error || "Failed to get suggestions");
+    }
+
+    setSuggestions(data.suggestions);
+  } catch (err) {
+    setSuggestions(null);
+    setError(err.message || "Something went wrong");
+  } finally {
+    setLoadingSuggestions(false);
+  }
+}
+  
   return (
     <main className="min-h-screen bg-gray-100 p-6">
       <div className="mx-auto max-w-3xl rounded-2xl bg-white p-6 shadow">
