@@ -35,3 +35,15 @@ This project followed the required workflow in this order:
 - Build AI suggestion route and UI workflow: `#3`
 - Add meaningful tests for supported weather app behaviors: `#4`
 - Review and improve codebase architecture after first working version: `#5`
+
+## Playwright MCP Evidence
+
+A meaningful end-to-end browser test was performed using Playwright MCP for this user flow:
+
+1. Enter a city
+2. Fetch weather
+3. View weather summary
+4. Request AI suggestions
+5. Verify travel, risk, and activity outputs appear
+
+See: `docs/workflow/playwright-test-notes.md`
