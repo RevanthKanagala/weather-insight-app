@@ -1,13 +1,11 @@
-import { describe, it, expect, beforeEach } from "vitest";
-import fs from "fs";
-import path from "path";
-import { saveLatestWeather, getLatestWeather } from "../lib/storage";
+import { beforeEach, describe, expect, it } from "vitest";
+import { getLatestWeather, saveLatestWeather } from "../lib/storage";
 
-const filePath = path.join(process.cwd(), "data", "weather-latest.json");
+process.env.WEATHER_STORAGE_MODE = "memory";
 
 describe("storage", () => {
     beforeEach(() => {
-        fs.writeFileSync(filePath, "{}", "utf-8");
+        saveLatestWeather({});
     });
 
     it("saves and reads weather data", () => {

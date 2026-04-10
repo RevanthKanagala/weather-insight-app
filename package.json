@@ -6,8 +6,8 @@
         "dev": "next dev --turbopack",
         "build": "next build --turbopack",
         "start": "next start",
-        "lint": "eslint",
-        "test": "vitest"
+        "lint": "eslint app lib tests",
+        "test": "vitest --pool threads"
     },
     "dependencies": {
         "next": "latest",

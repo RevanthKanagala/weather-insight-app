@@ -24,9 +24,17 @@ This is not just a page-load check. It exercises the real user workflow across:
 - final UI rendering
 
 ## Evidence collected
-- Screenshot or recording from Playwright MCP
-- Confirmation that the app completed the end-to-end flow
+- Playwright MCP interactive browser session against the local app
+- Full-flow UI state captured during the Playwright MCP session after suggestions rendered
+- Confirmation that the app completed the full end-to-end flow from city input to AI suggestions
 - Notes added to the repo for assignment evidence
 
 ## Outcome
+Verified on 2026-04-09 against the local built app:
+
+- entered `Toronto`
+- fetched live weather successfully
+- rendered structured weather summary
+- generated and displayed AI travel, risk, and activity suggestions
+
 The app successfully supported the intended end-to-end weather workflow through the user-facing interface.

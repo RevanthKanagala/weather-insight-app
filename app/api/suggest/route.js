@@ -1,5 +1,5 @@
 import OpenAI from "openai";
-import { getLatestWeather } from "@/lib/storage";
+import { getLatestWeather } from "../../../lib/storage";
 
 const client = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,

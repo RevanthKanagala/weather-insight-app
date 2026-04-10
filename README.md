@@ -12,6 +12,29 @@ A small end-to-end AI application that ingests weather data from OpenWeather API
 - Flight or hotel booking
 - General chatbot questions unrelated to weather
 
+## Architecture
+
+The app moves through a simple end-to-end flow:
+
+`City input -> OpenWeather ingestion -> transform to cleaned JSON -> store latest weather -> generate OpenAI suggestions -> render UI`
+
+Core files:
+
+- `app/page.js`
+- `app/api/weather/route.js`
+- `app/api/suggest/route.js`
+- `lib/weather.js`
+- `lib/transform.js`
+- `lib/storage.js`
+
+## Local Verification
+
+- Tests: `npm test -- --run`
+- Build: `npm run build`
+- Playwright evidence: `docs/workflow/playwright-test-notes.md`
+- Presentation checklist: `docs/presentation/submission-checklist.md`
+- Video outline: `docs/presentation/video-walkthrough-outline.md`
+
 ## Workflow Evidence
 
 ### Required skills workflow
@@ -25,9 +48,19 @@ This project followed the required workflow in this order:
 
 ### Evidence
 - Grill-me notes: `docs/workflow/grill-me-notes.md`
+- Write-a-PRD notes: `docs/workflow/write-a-prd-notes.md`
 - PRD document: `docs/workflow/prd.md`
+- PRD-to-Issues breakdown: `docs/workflow/prd-to-issues.md`
+- TDD notes: `docs/workflow/tdd-notes.md`
+- Improve-codebase-architecture notes: `docs/workflow/improve-codebase-architecture-notes.md`
 - Architecture review: `docs/workflow/architecture-before-after.md`
 - Playwright testing notes: `docs/workflow/playwright-test-notes.md`
+
+### PRD Summary
+- Problem: raw weather API output is noisy and not directly useful for quick planning
+- Solution: ingest live city weather, transform it into a clean summary, store it in JSON, and generate AI-guided travel, risk, and activity suggestions
+- Supported tasks: weather summary, travel guidance, risk alerts, clothing or activity recommendations
+- Out of scope: login, bookings, unrelated chatbot behavior, and overbuilt infrastructure
 
 ### GitHub Issues
 - Parent PRD issue: `#1`
@@ -35,6 +68,11 @@ This project followed the required workflow in this order:
 - Build AI suggestion route and UI workflow: `#3`
 - Add meaningful tests for supported weather app behaviors: `#4`
 - Review and improve codebase architecture after first working version: `#5`
+
+### PRD-to-Issues Summary
+- The PRD was broken into thin vertical slices instead of layer-only tasks
+- Each slice is independently demoable and tied to specific user stories
+- The approved slice breakdown is documented in `docs/workflow/prd-to-issues.md`
 
 ## Playwright MCP Evidence
 

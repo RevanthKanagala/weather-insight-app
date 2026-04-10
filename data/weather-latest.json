@@ -1,1 +1,18 @@
-{}
+{
+  "city": "Old Toronto",
+  "country": "CA",
+  "state": "Ontario",
+  "coordinates": {
+    "lat": 43.6534817,
+    "lon": -79.3839347
+  },
+  "weather": {
+    "main": "Clouds",
+    "description": "overcast clouds",
+    "temperature_c": 12.48,
+    "feels_like_c": 11.38,
+    "humidity": 61,
+    "wind_speed": 2.89
+  },
+  "generated_at": "2026-04-10T03:40:25.620Z"
+}
