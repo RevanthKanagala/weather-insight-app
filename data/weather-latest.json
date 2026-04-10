@@ -1,18 +1,18 @@
 {
-  "city": "Old Toronto",
-  "country": "CA",
-  "state": "Ontario",
+  "city": "New York",
+  "country": "US",
+  "state": "New York",
   "coordinates": {
-    "lat": 43.6534817,
-    "lon": -79.3839347
+    "lat": 40.7127281,
+    "lon": -74.0060152
   },
   "weather": {
-    "main": "Clouds",
-    "description": "overcast clouds",
-    "temperature_c": 12.48,
-    "feels_like_c": 11.38,
-    "humidity": 61,
-    "wind_speed": 2.89
+    "main": "Clear",
+    "description": "clear sky",
+    "temperature_c": 7.56,
+    "feels_like_c": 5.22,
+    "humidity": 73,
+    "wind_speed": 3.59
   },
-  "generated_at": "2026-04-10T03:40:25.620Z"
+  "generated_at": "2026-04-10T04:25:39.477Z"
 }
