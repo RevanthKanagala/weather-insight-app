@@ -1,0 +1,32 @@
+[
+    {
+        "id": "rep-001",
+        "city": "Toronto",
+        "scenario": "Typical Canadian city weather request",
+        "expected_behavior": "App should return a valid weather summary and practical suggestion."
+    },
+    {
+        "id": "rep-002",
+        "city": "Vancouver",
+        "scenario": "Rain-prone city weather request",
+        "expected_behavior": "App should return weather summary and mention rain-related precautions if rain is present."
+    },
+    {
+        "id": "rep-003",
+        "city": "Calgary",
+        "scenario": "Wind/cold-sensitive city weather request",
+        "expected_behavior": "App should return weather summary and give clothing/activity advice based on cold or wind."
+    },
+    {
+        "id": "rep-004",
+        "city": "New York",
+        "scenario": "Large international city weather request",
+        "expected_behavior": "App should handle a non-Canadian major city correctly."
+    },
+    {
+        "id": "rep-005",
+        "city": "Mumbai",
+        "scenario": "Hot/humid city weather request",
+        "expected_behavior": "App should return weather summary and provide heat or humidity-related recommendation when relevant."
+    }
+]

@@ -85,3 +85,22 @@ A meaningful end-to-end browser test was performed using Playwright MCP for this
 5. Verify travel, risk, and activity outputs appear
 
 See: `docs/workflow/playwright-test-notes.md`
+
+## Evaluation Evidence
+
+The Weather Insight App was evaluated using representative weather cases, failure cases, and a lightweight baseline comparison.
+
+### Representative Cases
+
+Five representative cases were created to test common user scenarios:
+
+- Toronto: typical Canadian city weather request
+- Vancouver: rain-prone city weather request
+- Calgary: wind/cold-sensitive city weather request
+- New York: large international city weather request
+- Mumbai: hot/humid city weather request
+
+These cases are stored in:
+
+```text
+evaluation/cases/representative_cases.json

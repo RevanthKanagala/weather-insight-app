@@ -1,0 +1,14 @@
+[
+    {
+        "id": "fail-001",
+        "city": "XyzInvalidCity",
+        "scenario": "Invalid city name entered by the user",
+        "expected_behavior": "App should not crash. It should show a clear error message such as: City not found. Please enter a valid city name."
+    },
+    {
+        "id": "fail-002",
+        "city": "",
+        "scenario": "User submits an empty city field",
+        "expected_behavior": "App should not call the weather API. It should ask the user to enter a valid city name."
+    }
+]
