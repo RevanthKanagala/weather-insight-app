@@ -1,5 +1,6 @@
 import { fetchWeatherByCity } from "@/lib/weather";
 import { transformWeatherData } from "@/lib/transform";
+import { saveLatestWeather } from "@/lib/storage";
 
 export async function GET(request) {
   try {
@@ -15,6 +16,8 @@ export async function GET(request) {
 
     const rawWeather = await fetchWeatherByCity(city);
     const transformed = transformWeatherData(rawWeather);
+
+    saveLatestWeather(transformed);
 
     return Response.json({
       ok: true,

@@ -1,4 +1,5 @@
 import OpenAI from "openai";
+import { getLatestWeather } from "@/lib/storage";
 
 function extractJson(text) {
   if (!text) return null;
@@ -16,13 +17,22 @@ function extractJson(text) {
 }
 
 export async function GET() {
-  return Response.json(
-    {
-      ok: false,
-      error: "Use POST /api/suggest with weather data in the request body.",
-    },
-    { status: 405 }
-  );
+  const latestWeather = getLatestWeather();
+
+  if (!latestWeather) {
+    return Response.json(
+      {
+        ok: false,
+        error: "No stored weather data found. Fetch weather first.",
+      },
+      { status: 404 }
+    );
+  }
+
+  return Response.json({
+    ok: true,
+    weather: latestWeather,
+  });
 }
 
 export async function POST(request) {

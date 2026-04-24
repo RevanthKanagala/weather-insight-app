@@ -7,7 +7,7 @@
         "build": "next build --turbopack",
         "start": "next start",
         "lint": "eslint app lib tests",
-        "test": "vitest --pool threads"
+        "test": "vitest run"
     },
     "dependencies": {
         "next": "latest",
