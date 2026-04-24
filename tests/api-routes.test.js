@@ -42,7 +42,7 @@ describe("API routes", () => {
         expect(response.status).toBe(400);
         expect(body).toEqual({
             ok: false,
-            error: "City query parameter is required",
+            error: "Please enter a valid city name.",
         });
     });
 

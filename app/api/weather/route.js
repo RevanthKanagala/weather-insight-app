@@ -9,7 +9,7 @@ export async function GET(request) {
 
     if (!city || !city.trim()) {
       return Response.json(
-        { ok: false, error: "City query parameter is required" },
+        { ok: false, error: "Please enter a valid city name." },
         { status: 400 }
       );
     }
@@ -17,15 +17,24 @@ export async function GET(request) {
     const rawWeather = await fetchWeatherByCity(city);
     const transformed = transformWeatherData(rawWeather);
 
-    saveLatestWeather(transformed);
+    try {
+      saveLatestWeather(transformed);
+    } catch (storageError) {
+      console.warn("Weather storage skipped:", storageError.message);
+    }
 
     return Response.json({
       ok: true,
       weather: transformed,
     });
   } catch (error) {
+    const message =
+      error.message === "City not found"
+        ? "City not found. Please enter a valid city name."
+        : error.message || "Something went wrong";
+
     return Response.json(
-      { ok: false, error: error.message || "Something went wrong" },
+      { ok: false, error: message },
       { status: 500 }
     );
   }
