@@ -88,7 +88,7 @@ See: `docs/workflow/playwright-test-notes.md`
 
 ## Evaluation Evidence
 
-The Weather Insight App was evaluated using representative weather cases, failure cases, and a lightweight baseline comparison.
+The Weather Insight App was evaluated using representative cases, failure cases, and a lightweight baseline comparison.
 
 ### Representative Cases
 
@@ -100,7 +100,7 @@ Five representative cases were created to test common user scenarios:
 - New York: large international city weather request
 - Mumbai: hot/humid city weather request
 
-These cases are stored in:
+File:
 
 ```text
 evaluation/cases/representative_cases.json
